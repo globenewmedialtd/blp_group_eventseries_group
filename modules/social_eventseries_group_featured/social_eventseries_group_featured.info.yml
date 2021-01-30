@@ -1,0 +1,9 @@
+name: 'Social Eventseries Group on Landing pages'
+description: 'Provides a eventseries Group featured view mode for use on landing pages.'
+type: module
+core: 8.x
+dependencies:
+  - social:blp_group_eventseries_group
+  - social:social_landing_page
+package: Social
+core_incompatible: false

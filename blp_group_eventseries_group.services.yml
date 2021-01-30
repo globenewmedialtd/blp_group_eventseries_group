@@ -1,0 +1,26 @@
+services:
+  blp_group_eventseries_group_access.group.permission:
+    class: 'Drupal\blp_group_eventseries_group\Access\FlexibleGroupContentAccessCheck'
+    tags:
+      - { name: 'access_check', applies_to: '_eventseries_group_content_visibility', priority: -99 }
+  blp_group_eventseries_group_access.eventseries_group.permission:
+    class: 'Drupal\blp_group_eventseries_group\Access\FlexibleGroupJoinPermissionAccessCheck'
+    tags:
+      - { name: 'access_check', applies_to: '_eventseries_group_join_permission', priority: -99 }
+
+  blp_group_eventseries_group_access.route_subscriber:
+    class: Drupal\blp_group_eventseries_group\Subscriber\Route
+    tags:
+      - { name: event_subscriber }
+
+  blp_group_eventseries_group.config_override:
+    class: Drupal\blp_group_eventseries_group\SocialGroupFlexibleGroupConfigOverride
+    arguments: ['@config.factory']
+    tags:
+      - { name: config.factory.override, priority: 10 }
+
+  blp_group_eventseries_group.redirect_subscriber:
+    class: Drupal\blp_group_eventseries_group\EventSubscriber\RedirectSubscriber
+    arguments: ['@current_user', '@current_route_match']
+    tags:
+      - { name: event_subscriber }
